@@ -1,0 +1,23 @@
+.custom-grid {
+    border: 2px solid #000; /* Cambia el color y el grosor del borde según lo necesites */
+    background-color: #6f6666; /* Cambia el color de fondo según lo necesites */
+    width: 50%;
+    margin-top: 15px;
+    opacity: 0.5;
+    backdrop-filter: blur(1px) saturate(180%);
+      -webkit-backdrop-filter: blur(1px) saturate(180%);
+      background-color: rgba(2, 2, 2, 0.75);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+  }
+  .text-center{
+    text-align: center;
+  }
+  .content{
+    padding: 15px;
+  }
+  .custom-table-header {
+    border: 1px solid #2d3586; /* Agrega el borde deseado */
+    background-color: #3c52ab; /* Cambia el color de fondo según tu preferencia */
+  }
+  

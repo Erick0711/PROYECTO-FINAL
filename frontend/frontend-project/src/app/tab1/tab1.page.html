@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Persona
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="content">
+  <ion-header collapse="condense" class="text-center">
+    <ion-toolbar class="text-center">
+      <ion-title size="large" class="text-center">Persona</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid class="custom-grid">
+
+    <ion-row class="ion-justify-content-center">
+      <!-- <ion-col size="6" hidden="true">
+        <ion-input label="id" type="text" style="border: 1px solid black;" [(ngModel)]="id" required></ion-input>
+      </ion-col> -->
+      <ion-col size="6">
+        <ion-input label="Nombre" type="text" style="border: 1px solid black;" [(ngModel)]="name" required></ion-input>
+      </ion-col>
+      <ion-col size="6">
+        <ion-input label="Apellido" type="text" [(ngModel)]="lastName" required></ion-input>
+      </ion-col>
+      <ion-col size="6">
+        <ion-input label="CI" type="text" [(ngModel)]="ci" required></ion-input>
+      </ion-col>
+      <ion-col size="6">
+        <ion-input label="Telefono" type="text" [(ngModel)]="phone" required></ion-input>
+      </ion-col>
+      <ion-col size="12" *ngIf="addButton">
+        <ion-button color="success" style="width: 100%" (click)="addPerson()">Guardar</ion-button>
+      </ion-col>
+      <ion-col size="12" *ngIf="editButton">
+        <ion-button color="warning" style="width: 100%" (click)="editPerson()">Editar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-content>
+    <ion-grid class="custom-grid ion-align-items-center">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-grid class="table-header custom-table-header">
+            <ion-row>
+              <ion-col>#</ion-col>
+              <ion-col>Nombre</ion-col>
+              <ion-col>Apellido</ion-col>
+              <ion-col>CI</ion-col>
+              <ion-col>Telefono</ion-col>
+              <ion-col>Opciones</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col size="10">
+          <ion-grid class="table-row">
+            <ion-row *ngFor="let person of listPerson; let i = index">
+              <ion-col>{{ i + 1 }}</ion-col>
+              <ion-col>{{person.name}}</ion-col>
+              <ion-col>{{person.lastName}}</ion-col>
+              <ion-col>{{person.ci}}</ion-col>
+              <ion-col>{{person.phone}}</ion-col>
+              <ion-col>
+                <ion-button size="small" [color]="editedPersonId === person.id && isButtonActive ? 'danger' : 'warning'"
+                  (click)="getIdPerson(person.id)" [disabled]="isButtonActive && editedPersonId !== person.id">
+                  <ion-icon [name]="editedPersonId === person.id && isButtonActive ? 'close-outline' : 'create-outline'"></ion-icon>
+                </ion-button>
+                <ion-button size="small" color="danger" (click)="deletePerson(person.id)">
+                  <ion-icon name="trash"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <!-- Agrega más filas similares aquí si es necesario -->
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  
+  
+  <app-explore-container name="Persona"></app-explore-container>
+</ion-content>
+

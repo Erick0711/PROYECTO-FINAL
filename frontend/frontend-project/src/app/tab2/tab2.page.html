@@ -1,0 +1,88 @@
+
+<ion-content>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      USUARIO
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-grid class="custom-grid">
+
+  <ion-row class="ion-justify-content-center">
+
+    <ion-col size="12" *ngIf="addButton">
+      <ion-list>
+        <ion-item>
+          <ion-select label="Seleccionar Persona" label-placement="floating" [(ngModel)]="selectedPersonId" (ionChange)="personSelected($event)">
+            <ion-select-option *ngFor="let person of listPerson" [value]="person.id">
+              {{ person.name }} {{ person.lastName }} - {{ person.ci }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+
+    <ion-col size="4" *ngIf="addButton">
+      <ion-input label="Usuario" type="text" [(ngModel)]="username" required></ion-input>
+    </ion-col>
+    <ion-col size="4">
+      <ion-input label="Contraseña" type="password" style="border: 1px solid black;" [(ngModel)]="password" required></ion-input>
+    </ion-col>
+    <ion-col size="4">
+      <ion-input label="Imagen" type="text" style="border: 1px solid black;" [(ngModel)]="image" required></ion-input>
+    </ion-col>
+    <ion-col size="12" *ngIf="addButton">
+      <ion-button color="success" style="width: 100%" (click)="addUsers()">Guardar</ion-button>
+    </ion-col>
+    <ion-col size="12" *ngIf="editButton">
+      <ion-button color="warning" style="width: 100%" (click)="editUsers()">Editar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+  <ion-grid class="custom-grid ion-align-items-center">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-grid class="table-header custom-table-header">
+          <ion-row>
+            <ion-col>#</ion-col>
+            <ion-col>NOMBRE</ion-col>
+            <ion-col>APELLIDO</ion-col>
+            <ion-col>CI</ion-col>
+            <ion-col>TELEFONO</ion-col>
+            <ion-col>USUARIO</ion-col>
+            <ion-col>IMAGEN</ion-col>
+            <ion-col>OPCIONES</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="10">
+        <ion-grid class="table-row">
+          <ion-row *ngFor="let user of listUsers; let i = index">
+            <ion-col>{{ i + 1 }}</ion-col>
+            <ion-col>{{user.name}}</ion-col>
+            <ion-col>{{user.lastName}}</ion-col>
+            <ion-col>{{user.ci}}</ion-col>
+            <ion-col>{{user.phone}}</ion-col>
+            <ion-col>{{user.userName}}</ion-col>
+            <ion-col>{{user.image}}</ion-col>
+            <ion-col size="2">
+              <ion-button size="small" 
+                        [color]="editedUserId === user.id && isButtonActive ? 'danger' : 'warning'"
+                        (click)="user.id !== undefined ? toggleEdit(user.id) : null" 
+                        [disabled]="isButtonActive && editedUserId !== user.id">
+              <ion-icon [name]="editedUserId === user.id && isButtonActive ? 'close-outline' : 'create-outline'"></ion-icon>
+            </ion-button>
+              <ion-button size="small" color="danger" (click)="deleteUsers(user.id)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+  <app-explore-container name="Tab 2 page"></app-explore-container>
